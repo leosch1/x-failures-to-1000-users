@@ -1,0 +1,58 @@
+name: Deploy Frontend
+
+on:
+  push:
+    paths:
+      - ".github/workflows/deploy-frontend.yaml"
+      - "frontend/**"
+    branches:
+      - main
+
+env:
+  AWS_REGION: 
+
+jobs:
+  deploy:
+    name: Build and Deploy Frontend to S3 + CloudFront
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build frontend (static export)
+        working-directory: ./frontend
+        # env:
+        #   NEXT_PUBLIC_API_BASE_URL: https://api.viberadar.io
+        #   NEXT_PUBLIC_POSTHOG_KEY: phc_zG2JMiLzDLpcztzeucI8U7o1Wn9T39EpYXmYnPnBceG
+        #   NEXT_PUBLIC_POSTHOG_HOST: https://eu.i.posthog.com
+        run: |
+          npm run build
+
+      - name: Sync static site to S3
+        run: |
+          S3_BUCKET="x-failures-to-1000-users-frontend-18792384961293"
+          aws s3 sync ./frontend/out s3://$S3_BUCKET --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          CLOUDFRONT_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='x-failures-to-1000-users-frontend'].Id" --output text)
+          aws cloudfront create-invalidation \
+            --distribution-id $CLOUDFRONT_ID \
+            --paths "/*"
