@@ -1,12 +1,12 @@
-# resource "aws_acm_certificate" "frontend" {
-#   domain_name       = var.domain_name
-#   validation_method = "DNS"
-#   provider          = aws.us_east_1
+resource "aws_acm_certificate" "frontend" {
+  domain_name       = var.domain_name
+  validation_method = "DNS"
+  provider          = aws.us_east_1
 
-#   lifecycle {
-#     create_before_destroy = true
-#   }
-# }
+  lifecycle {
+    create_before_destroy = true
+  }
+}
 
 # resource "aws_route53_record" "frontend_validation" {
 #   name    = tolist(aws_acm_certificate.frontend.domain_validation_options)[0].resource_record_name

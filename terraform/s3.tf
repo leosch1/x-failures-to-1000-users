@@ -20,32 +20,32 @@ resource "aws_s3_bucket_public_access_block" "frontend" {
   restrict_public_buckets = true
 }
 
-# resource "aws_s3_bucket_policy" "frontend" {
-#   bucket = aws_s3_bucket.frontend.id
-#   policy = data.aws_iam_policy_document.frontend_s3_policy.json
-# }
+resource "aws_s3_bucket_policy" "frontend" {
+  bucket = aws_s3_bucket.frontend.id
+  policy = data.aws_iam_policy_document.frontend_s3_policy.json
+}
 
-# data "aws_iam_policy_document" "frontend_s3_policy" {
-#   statement {
-#     sid = "AllowCloudFrontServicePrincipalReadOnly"
+data "aws_iam_policy_document" "frontend_s3_policy" {
+  statement {
+    sid = "AllowCloudFrontServicePrincipalReadOnly"
 
-#     effect = "Allow"
+    effect = "Allow"
 
-#     principals {
-#       type        = "Service"
-#       identifiers = ["cloudfront.amazonaws.com"]
-#     }
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
 
-#     actions = ["s3:GetObject"]
+    actions = ["s3:GetObject"]
 
-#     resources = [
-#       "${aws_s3_bucket.frontend.arn}/*"
-#     ]
+    resources = [
+      "${aws_s3_bucket.frontend.arn}/*"
+    ]
 
-#     condition {
-#       test     = "StringEquals"
-#       variable = "AWS:SourceArn"
-#       values   = [aws_cloudfront_distribution.frontend.arn]
-#     }
-#   }
-# }
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudfront_distribution.frontend.arn]
+    }
+  }
+}
