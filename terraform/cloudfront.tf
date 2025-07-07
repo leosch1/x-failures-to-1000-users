@@ -38,7 +38,7 @@ resource "aws_cloudfront_distribution" "frontend" {
   price_class = "PriceClass_100"
 
   viewer_certificate {
-    acm_certificate_arn            = aws_acm_certificate_validation.frontend.certificate_arn
+    acm_certificate_arn            = aws_acm_certificate.frontend.arn
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = "TLSv1.2_2021"
     cloudfront_default_certificate = false
