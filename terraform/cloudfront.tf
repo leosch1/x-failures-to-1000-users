@@ -12,9 +12,8 @@ resource "aws_cloudfront_distribution" "frontend" {
   default_root_object = "index.html"
   aliases             = [var.domain_name]
   origin {
-    domain_name = aws_s3_bucket.frontend.bucket_regional_domain_name
-    origin_id   = "s3-frontend"
-
+    domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name
+    origin_id                = "s3-frontend"
     origin_access_control_id = aws_cloudfront_origin_access_control.frontend_oac.id
   }
   default_cache_behavior {

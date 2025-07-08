@@ -2,11 +2,12 @@ name: Deploy Frontend
 
 on:
   push:
+    branches:
+      - main
     paths:
       - ".github/workflows/deploy-frontend.yaml"
       - "frontend/**"
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
   AWS_REGION: 
