@@ -7,15 +7,7 @@ const projects = [
     subtitle: "Turn your life into a manga",
     description:
       "Write a paragraph every day and let AI turn it into a manga.\nMake your story (life) worthwhile.",
-    image: (
-      <Image
-        src="/storylog.png"
-        alt="Storylog diagram"
-        width={180}
-        height={80}
-        className="w-full h-auto object-contain"
-      />
-    ),
+    imagePath: "/storylog.png",
     status: "BUILDING: 0 users",
     statusType: "building" as const,
     // expandedDefault: true,
@@ -25,15 +17,7 @@ const projects = [
     subtitle: "Listen to playlists from other cities",
     description:
       "Click somewhere on a globe and explore what music people there are listening to.",
-    image: (
-      <Image
-        src="/viberadar.png"
-        alt="Vibe Radar globe"
-        width={220}
-        height={120}
-        className="w-full h-auto object-contain"
-      />
-    ),
+    imagePath: "/viberadar.png",
     status: "FAILED: 30 users",
     statusType: "failed" as const,
     tryItUrl: "https://viberadar.io",
@@ -44,15 +28,7 @@ const projects = [
     subtitle: "Explore your YouTube journey",
     description:
       "Did you know you can export your watch history from YouTube?\nThis is a tool to visualise it.",
-    image: (
-      <Image
-        src="/my-youtube-path.png"
-        alt="YouTube Path screenshot"
-        width={220}
-        height={80}
-        className="w-full h-auto object-contain"
-      />
-    ),
+    imagePath: "/my-youtube-path.png",
     status: "FAILED: 12 users",
     statusType: "failed" as const,
     tryItUrl: "https://my-youtube-path.com",
@@ -63,15 +39,7 @@ const projects = [
     subtitle: "Create a playlist we both like",
     description:
       "A website which creates a playlist with songs both you and your friend like.\nFor Spotify and Apple Music.",
-    image: (
-      <Image
-        src="/spot-the-pie.png"
-        alt="Spot The Pie diagram"
-        width={180}
-        height={80}
-        className="w-full h-auto object-contain"
-      />
-    ),
+    imagePath: "/spot-the-pie.png",
     status: "FAILED: 4 users",
     statusType: "failed" as const,
     // tryItUrl: "#",

@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface ProjectCardProps {
   title: string;
   subtitle: string;
   description: string;
-  image?: React.ReactNode;
+  imagePath: string;
   status: string;
   statusType: "building" | "failed";
   tryItUrl?: string;
@@ -17,7 +18,7 @@ export default function ProjectCard({
   title,
   subtitle,
   description,
-  image,
+  imagePath,
   status,
   statusType,
   tryItUrl,
@@ -57,11 +58,15 @@ export default function ProjectCard({
         <div className="flex flex-col gap-2 pt-2">
           <div className="text-2xl font-extrabold text-white leading-tight">{subtitle}</div>
           <div className="text-neutral-200 text-base font-medium leading-snug whitespace-pre-line">{description}</div>
-          {image && (
-            <div className="rounded-lg bg-neutral-600 flex items-center justify-center mt-1 mb-1">
-              {image}
-            </div>
-          )}
+          <div className="rounded-lg bg-neutral-600 flex items-center justify-center mt-1 mb-1">
+            <Image
+              src={imagePath}
+              alt={title}
+              width={280}
+              height={150}
+              className="w-full h-auto object-contain"
+            />
+          </div>
           {(tryItUrl || blogUrl) && (
             <div className="flex gap-2 my-1">
               {tryItUrl && (
