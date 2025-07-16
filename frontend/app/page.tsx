@@ -1,5 +1,4 @@
 import ProjectCard from "./ProjectCard";
-import Image from "next/image";
 
 const projects = [
   {
