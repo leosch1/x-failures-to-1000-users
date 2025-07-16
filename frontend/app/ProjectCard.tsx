@@ -27,11 +27,9 @@ export default function ProjectCard({
   const [expanded, setExpanded] = useState(expandedDefault);
 
   return (
-    <div className="bg-[#2E2E2E] rounded-xl shadow-md px-4 py-4 flex flex-col gap-2">
-      <div
-        className="flex items-center justify-between cursor-pointer select-none"
-        onClick={() => setExpanded((e) => !e)}
-      >
+    <div className="bg-[#2E2E2E] rounded-xl shadow-md px-4 py-4 flex flex-col gap-2 cursor-pointer select-none"
+      onClick={() => setExpanded((e) => !e)}>
+      <div className="flex items-center justify-between">
         <span className="text-lg leading-none font-semibold text-white">{title}</span>
         <span
           className={`text-white text-2xl transition-transform duration-200 ${expanded ? "scale-y-[-1]" : "scale-y-[1]"
@@ -53,8 +51,10 @@ export default function ProjectCard({
           </svg>
         </span>
       </div>
-      {expanded && (
-        <div className="flex flex-col gap-2">
+      <div
+        className={`transition-all duration-300 overflow-hidden ${expanded ? "max-h-[999px] opacity-100 visible" : "max-h-0 opacity-0 invisible"}`}
+      >
+        <div className="flex flex-col gap-2 pt-2">
           <div className="text-2xl font-extrabold text-white leading-tight">{subtitle}</div>
           <div className="text-neutral-200 text-base font-medium leading-snug whitespace-pre-line">{description}</div>
           {image && (
@@ -89,7 +89,7 @@ export default function ProjectCard({
             </div>
           )}
         </div>
-      )}
+      </div>
       <span
         className={`inline-block text-xs font-semibold rounded px-2 py-1 w-fit ${statusType === "building"
           ? "bg-yellow-300 text-yellow-900"
@@ -98,6 +98,6 @@ export default function ProjectCard({
       >
         {status}
       </span>
-    </div>
+    </div >
   );
-} 
+}
