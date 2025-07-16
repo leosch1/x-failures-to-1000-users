@@ -27,8 +27,8 @@ jobs:
 
       - name: Terraform Init
         run: |
-          terraform -chdir=terraform init
+          terraform -chdir=terraform/environments/aws init
 
       - name: Terraform Apply
         run: |
-          terraform -chdir=terraform apply -auto-approve -input=false
+          terraform -chdir=terraform/environments/aws apply -auto-approve -input=false
