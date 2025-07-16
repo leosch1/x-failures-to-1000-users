@@ -21,6 +21,7 @@ provider "aws" {
     sts        = "http://localhost:4566"
     cloudwatch = "http://localhost:4566"
     logs       = "http://localhost:4566"
+    route53    = "http://localhost:4566"
   }
 }
 
@@ -35,20 +36,23 @@ provider "aws" {
   skip_requesting_account_id  = true
 
   endpoints {
-    # ACM
     acm = "http://localhost:4566"
   }
 }
 
+resource "aws_route53_zone" "primary" {
+  name = "schleo.com"
+}
 
-module "viberadar" {
-  source = "../../resources"
+module "x_failures_to_1000_users" {
+  source          = "../../resources"
+  route53_zone_id = aws_route53_zone.primary.zone_id
   providers = {
     aws           = aws
     aws.us_east_1 = aws.us_east_1
   }
 }
 
-output "api_url" {
-  value = "http://localhost:4566/restapis/${module.viberadar.api_gateway_id}/${module.viberadar.api_gateway_stage}/_user_request_/"
-}
+# output "api_url" {
+#   value = "http://localhost:4566/restapis/${module.viberadar.api_gateway_id}/${module.viberadar.api_gateway_stage}/_user_request_/"
+# }

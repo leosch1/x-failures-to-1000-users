@@ -1,10 +1,5 @@
-data "aws_route53_zone" "primary" {
-  name         = var.domain_name
-  private_zone = false
-}
-
 resource "aws_route53_record" "frontend" {
-  zone_id = data.aws_route53_zone.primary.zone_id
+  zone_id = var.route53_zone_id
   name    = var.domain_name
   type    = "A"
 
