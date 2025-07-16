@@ -70,6 +70,7 @@ export default function ProjectCard({
                   className="bg-neutral-200 text-neutral-900 text-xs font-semibold rounded px-3 py-1 flex items-center gap-1 hover:bg-white transition"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
                 >
                   TRY IT <span className="ml-1">↗</span>
                 </a>
@@ -80,6 +81,7 @@ export default function ProjectCard({
                   className="bg-neutral-500 text-white text-xs font-semibold rounded px-3 py-1 flex items-center gap-1 hover:bg-neutral-400 transition"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
                 >
                   BLOG <span className="ml-1">📄</span>
                 </a>

@@ -18,7 +18,7 @@ const projects = [
     ),
     status: "BUILDING: 0 users",
     statusType: "building" as const,
-    expandedDefault: true,
+    // expandedDefault: true,
   },
   {
     title: "Vibe Radar",
