@@ -7,11 +7,12 @@ interface ProjectCardProps {
   subtitle: string;
   description: string;
   imagePath: string;
-  status: string;
-  statusType: "building" | "failed";
+  userCounts: number;
+  isBuilding?: boolean;
   tryItUrl?: string;
   blogUrl?: string;
   expandedDefault?: boolean;
+  loading?: boolean;
 }
 
 export default function ProjectCard({
@@ -19,11 +20,12 @@ export default function ProjectCard({
   subtitle,
   description,
   imagePath,
-  status,
-  statusType,
+  userCounts,
+  isBuilding = false,
   tryItUrl,
   blogUrl,
   expandedDefault = false,
+  loading = false,
 }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(expandedDefault);
 
@@ -108,12 +110,24 @@ export default function ProjectCard({
         </div>
       </div>
       <span
-        className={`inline-block text-sm font-semibold rounded px-2 py-1 w-fit ${statusType === "building"
-          ? "bg-yellow-300 text-yellow-900"
-          : "bg-red-400 text-white"
+        className={`inline-block text-sm font-semibold rounded px-2 py-1 w-fit ${loading
+          ? "bg-neutral-500 text-neutral-300 animate-pulse"
+          : isBuilding
+            ? "bg-yellow-300 text-yellow-900"
+            : userCounts < 1000
+              ? "bg-red-400 text-white"
+              : "bg-green-400 text-white"
           }`}
       >
-        {status}
+        {loading ? (
+          <span className="opacity-0">STATUS: 0</span>
+        ) : isBuilding ? (
+          `BUILDING: ${userCounts}`
+        ) : userCounts < 1000 ? (
+          `FAILED: ${userCounts}`
+        ) : (
+          `SUCCESS: ${userCounts}`
+        )}
       </span>
     </div >
   );

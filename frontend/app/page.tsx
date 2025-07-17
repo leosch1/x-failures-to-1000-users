@@ -1,4 +1,7 @@
+"use client";
+import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
+import { fetchUserCounts } from "./services/projectStatusApi";
 
 const projects = [
   {
@@ -7,8 +10,7 @@ const projects = [
     description:
       "Write a paragraph every day and let AI turn it into a manga.\nMake your story (life) worthwhile.",
     imagePath: "/storylog.png",
-    status: "BUILDING: 0 users",
-    statusType: "building" as const,
+    isBuilding: true,
     // expandedDefault: true,
   },
   {
@@ -17,8 +19,6 @@ const projects = [
     description:
       "Click somewhere on a globe and explore what music people there are listening to.",
     imagePath: "/viberadar.png",
-    status: "FAILED: 30 users",
-    statusType: "failed" as const,
     tryItUrl: "https://viberadar.io",
     // blogUrl: "#",
   },
@@ -28,8 +28,6 @@ const projects = [
     description:
       "Did you know you can export your watch history from YouTube?\nThis is a tool to visualise it.",
     imagePath: "/my-youtube-path.png",
-    status: "FAILED: 12 users",
-    statusType: "failed" as const,
     tryItUrl: "https://my-youtube-path.com",
     // blogUrl: "#",
   },
@@ -39,14 +37,23 @@ const projects = [
     description:
       "A website which creates a playlist with songs both you and your friend like.\nFor Spotify and Apple Music.",
     imagePath: "/spot-the-pie.png",
-    status: "FAILED: 4 users",
-    statusType: "failed" as const,
     // tryItUrl: "#",
     // blogUrl: "#",
   },
 ];
 
 export default function Home() {
+  const [userCounts, setUserCounts] = useState<Record<string, number>>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchUserCounts()
+      .then((data: Record<string, number>) => {
+        setUserCounts(data);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col items-center p-5 md:pt-8">
       <main className="w-full max-w-2xl flex flex-col gap-6">
@@ -61,7 +68,12 @@ export default function Home() {
         </header>
         <section className="flex flex-col gap-4">
           {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+            <ProjectCard
+              key={project.title}
+              {...project}
+              userCounts={userCounts[project.title] || 0}
+              loading={loading}
+            />
           ))}
         </section>
       </main>
