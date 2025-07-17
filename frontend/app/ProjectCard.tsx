@@ -55,18 +55,16 @@ export default function ProjectCard({
       <div
         className={`transition-all duration-300 overflow-hidden ${expanded ? "max-h-[999px] opacity-100 visible" : "max-h-0 opacity-0 invisible"}`}
       >
-        <div className="flex flex-col gap-2 pt-2">
+        <div className="flex flex-col gap-2 pt-1">
           <div className="text-2xl font-extrabold text-white leading-tight">{subtitle}</div>
           <div className="text-neutral-200 text-base font-medium leading-snug whitespace-pre-line">{description}</div>
-          <div className="rounded-lg bg-neutral-600 flex items-center justify-center mt-1 mb-1">
-            <Image
-              src={imagePath}
-              alt={title}
-              width={280}
-              height={150}
-              className="w-full h-auto object-contain"
-            />
-          </div>
+          <Image
+            src={imagePath}
+            alt={title}
+            width={280}
+            height={150}
+            className="w-full h-auto object-contain rounded-lg mt-1 mb-1"
+          />
           {(tryItUrl || blogUrl) && (
             <div className="flex gap-2 mb-2">
               {tryItUrl && (

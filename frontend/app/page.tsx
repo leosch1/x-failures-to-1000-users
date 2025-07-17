@@ -48,8 +48,8 @@ const projects = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center p-5">
-      <main className="w-full max-w-xs flex flex-col gap-6">
+    <div className="min-h-screen flex flex-col items-center p-5 md:pt-8">
+      <main className="w-full max-w-2xl flex flex-col gap-6">
         <header className="mb-2">
           <h1 className="text-4xl font-extrabold text-white leading-tight mb-3">
             how many failures until 1000 users?
