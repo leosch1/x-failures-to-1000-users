@@ -5,7 +5,7 @@ module "lambda_user_count" {
   version                       = "~> 8.0"
   function_name                 = "user-count"
   handler                       = "handler.lambda_handler"
-  runtime                       = "python3.11"
+  runtime                       = "python3.12"
   source_path                   = "../../../backend/lambdas/user-count"
   architectures                 = ["arm64"]
   create_package                = true
