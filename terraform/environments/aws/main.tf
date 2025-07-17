@@ -18,13 +18,20 @@ provider "aws" {
 }
 
 module "frontend" {
-  source          = "../../modules/frontend"
+  source = "../../modules/frontend"
   providers = {
     aws           = aws
     aws.us_east_1 = aws.us_east_1
   }
 }
 
-# output "api_url" {
-#   value = module.x_failures_to_1000_users.api_url
-# }
+module "backend" {
+  source = "../../modules/backend"
+  providers = {
+    aws = aws
+  }
+}
+
+output "api_url" {
+  value = module.backend.api_url
+}

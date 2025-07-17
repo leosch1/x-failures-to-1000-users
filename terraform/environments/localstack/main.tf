@@ -25,34 +25,13 @@ provider "aws" {
   }
 }
 
-provider "aws" {
-  alias                       = "us_east_1"
-  region                      = "us-east-1"
-  access_key                  = "test"
-  secret_key                  = "test"
-  s3_use_path_style           = true
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-  skip_requesting_account_id  = true
-
-  endpoints {
-    acm = "http://localhost:4566"
-  }
-}
-
-resource "aws_route53_zone" "primary" {
-  name = "schleo.com"
-}
-
-module "x_failures_to_1000_users" {
-  source          = "../../resources"
-  route53_zone_id = aws_route53_zone.primary.zone_id
+module "backend" {
+  source = "../../modules/backend"
   providers = {
-    aws           = aws
-    aws.us_east_1 = aws.us_east_1
+    aws = aws
   }
 }
 
-# output "api_url" {
-#   value = "http://localhost:4566/restapis/${module.viberadar.api_gateway_id}/${module.viberadar.api_gateway_stage}/_user_request_/"
-# }
+output "api_url" {
+  value = "http://localhost:4566/restapis/${module.backend.api_gateway_id}/${module.backend.api_gateway_stage}/_user_request_/"
+}
