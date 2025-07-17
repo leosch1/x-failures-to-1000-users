@@ -17,14 +17,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
-data "aws_route53_zone" "primary" {
-  name         = "schleo.com"
-  private_zone = false
-}
-
-module "x_failures_to_1000_users" {
-  source          = "../../resources"
-  route53_zone_id = data.aws_route53_zone.primary.zone_id
+module "frontend" {
+  source          = "../../modules/frontend"
   providers = {
     aws           = aws
     aws.us_east_1 = aws.us_east_1
