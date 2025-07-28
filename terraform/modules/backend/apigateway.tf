@@ -29,12 +29,12 @@ resource "aws_api_gateway_stage" "default" {
   stage_name    = "default"
 }
 
-### Endpoint for /userCount ###
+### Endpoint for /userCounts ###
 
 resource "aws_api_gateway_resource" "user_count" {
   rest_api_id = aws_api_gateway_rest_api.this.id
   parent_id   = data.aws_api_gateway_resource.root.id
-  path_part   = "userCount"
+  path_part   = "userCounts"
 }
 
 resource "aws_api_gateway_method" "user_count" {

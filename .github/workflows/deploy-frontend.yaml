@@ -29,8 +29,8 @@ jobs:
 
       - name: Build frontend (static export)
         working-directory: ./frontend
-        # env:
-        #   NEXT_PUBLIC_API_BASE_URL: https://api.viberadar.io
+        env:
+          NEXT_PUBLIC_API_BASE_URL: https://api.schleo.com
         #   NEXT_PUBLIC_POSTHOG_KEY: phc_zG2JMiLzDLpcztzeucI8U7o1Wn9T39EpYXmYnPnBceG
         #   NEXT_PUBLIC_POSTHOG_HOST: https://eu.i.posthog.com
         run: |

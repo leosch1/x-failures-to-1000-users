@@ -1,4 +1,4 @@
-### Lambda Function for /userCount ###
+### Lambda Function for /userCounts ###
 
 module "lambda_user_count" {
   source                        = "terraform-aws-modules/lambda/aws"
@@ -19,5 +19,5 @@ resource "aws_lambda_permission" "apigw" {
   action        = "lambda:InvokeFunction"
   function_name = module.lambda_user_count.lambda_function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.this.execution_arn}/*/GET/userCount"
+  source_arn    = "${aws_api_gateway_rest_api.this.execution_arn}/*/GET/userCounts"
 }
