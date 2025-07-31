@@ -1,7 +1,9 @@
 import json
-import boto3
+import os
 
 def lambda_handler(event, context):
+    allowed_origin = os.getenv("ALLOWED_ORIGIN", "")
+
     data = {
         "Storylog": 0,
         "Vibe Radar": 30,
@@ -12,7 +14,7 @@ def lambda_handler(event, context):
     return {
         "statusCode": 200,
         "headers": {
-            "Access-Control-Allow-Origin": "schleo.com",
+            "Access-Control-Allow-Origin": allowed_origin,
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Methods": "GET,OPTIONS"
         },

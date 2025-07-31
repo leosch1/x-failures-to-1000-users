@@ -30,6 +30,7 @@ module "backend" {
   providers = {
     aws = aws
   }
+  allowed_origin = "http://localhost:3000"
 }
 
 output "api_url" {

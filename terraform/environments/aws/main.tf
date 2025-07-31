@@ -30,6 +30,7 @@ module "backend" {
   providers = {
     aws = aws
   }
+  allowed_origin = "https://schleo.com"
 }
 
 output "api_url" {

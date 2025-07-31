@@ -12,6 +12,9 @@ module "lambda_user_count" {
   package_type                  = "Zip"
   create_role                   = true
   attach_cloudwatch_logs_policy = true
+  environment_variables = {
+    ALLOWED_ORIGIN = var.allowed_origin
+  }
 }
 
 resource "aws_lambda_permission" "apigw" {
