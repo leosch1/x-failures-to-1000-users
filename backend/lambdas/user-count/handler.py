@@ -9,17 +9,17 @@ def fetch_user_counts_from_posthog():
     posthog_insight_mapping = {
         "Vibe Radar": {
             "project_id": "67446",
-            "insight_id": "1040318"
+            "insight_id": "1040318",
             "correction": 0
         },
         "My YouTube Path": {
             "project_id": "19262",
-            "insight_id": "1271863"
+            "insight_id": "1271863",
             "correction": -200
         },
         "Spot The Pie": {
             # "project_id": "",
-            # "insight_id": ""
+            # "insight_id": "",
             "correction": 15
         }
     }
