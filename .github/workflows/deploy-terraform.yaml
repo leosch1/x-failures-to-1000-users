@@ -34,6 +34,8 @@ jobs:
           aws-region: eu-central-1
 
       - name: Terraform Init
+        env:
+          TF_VAR_posthog_api_key: ${{ secrets.POSTHOG_API_KEY }}
         run: |
           terraform -chdir=terraform/environments/aws init
 

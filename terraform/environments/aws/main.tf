@@ -31,6 +31,7 @@ module "backend" {
     aws = aws
   }
   allowed_origin = "https://schleo.com"
+  posthog_api_key = var.posthog_api_key
 }
 
 output "api_url" {

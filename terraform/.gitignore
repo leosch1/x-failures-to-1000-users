@@ -22,4 +22,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Local environment variables file
+terraform.auto.tfvars
+
 **/builds

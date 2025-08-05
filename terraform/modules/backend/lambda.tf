@@ -13,7 +13,8 @@ module "lambda_user_count" {
   create_role                   = true
   attach_cloudwatch_logs_policy = true
   environment_variables = {
-    ALLOWED_ORIGIN = var.allowed_origin
+    ALLOWED_ORIGIN  = var.allowed_origin
+    POSTHOG_API_KEY = var.posthog_api_key
   }
 }
 
