@@ -10,12 +10,18 @@ def fetch_user_counts_from_posthog():
         "Vibe Radar": {
             "project_id": "67446",
             "insight_id": "1040318"
+            "correction": 0
         },
         "My YouTube Path": {
             "project_id": "19262",
-            "insight_id": ""
+            "insight_id": "1271863"
+            "correction": -200
         },
-        # Add more products as needed
+        "Spot The Pie": {
+            # "project_id": "",
+            # "insight_id": ""
+            "correction": 15
+        }
     }
 
     headers = {
@@ -27,23 +33,23 @@ def fetch_user_counts_from_posthog():
 
     for product_name, config in posthog_insight_mapping.items():
         try:
-            if not config["insight_id"]:
+            if config["insight_id"]:
+                url = base_url.format(
+                    project_id=config["project_id"],
+                    insight_id=config["insight_id"]
+                )
+
+                response = requests.get(url, headers=headers)
+                response.raise_for_status()
+                data = response.json()
+                visitor_counts[product_name] = data["result"][0].get("count", 0)
+            else:
                 visitor_counts[product_name] = 0
-                continue
-
-            url = base_url.format(
-                project_id=config["project_id"],
-                insight_id=config["insight_id"]
-            )
-
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
-            data = response.json()
-            visitor_counts[product_name] = data["result"][0].get("count", 0)
-
         except Exception as e:
             print(f"Error fetching visitors for {product_name}: {e}")
             visitor_counts[product_name] = 0
+
+        visitor_counts[product_name] += config.get("correction", 0)
 
     return visitor_counts
 
