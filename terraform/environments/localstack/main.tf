@@ -35,5 +35,5 @@ module "backend" {
 }
 
 output "api_url" {
-  value = "http://localhost:4566/restapis/${module.backend.api_gateway_id}/${module.backend.api_gateway_stage}/_user_request_/"
+  value = "http://localhost:4566/_aws/execute-api/${module.backend.api_gateway_id}/${module.backend.api_gateway_stage}/_user_request_/"
 }
