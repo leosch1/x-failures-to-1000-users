@@ -120,13 +120,13 @@ export default function ProjectCard({
           }`}
       >
         {loading ? (
-          <span className="opacity-0">STATUS: 0</span>
+          <span className="opacity-0">0 users: STATUS</span>
         ) : isBuilding ? (
-          `BUILDING: ${userCounts}`
+          "BUILDING..."
         ) : userCounts < 1000 ? (
-          `FAILED: ${userCounts}`
+          `${userCounts} users: FAILED`
         ) : (
-          `SUCCESS: ${userCounts}`
+          `${userCounts} users: SUCCESS`
         )}
       </span>
     </div >

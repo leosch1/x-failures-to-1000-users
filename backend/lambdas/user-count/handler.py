@@ -39,15 +39,11 @@ def fetch_user_counts_from_posthog():
             response = requests.get(url, headers=headers)
             response.raise_for_status()
             data = response.json()
-
-            if data and "result" in data and isinstance(data["result"], list):
-                visitor_counts[product_name] = data["result"][0].get("count", 0)
-            else:
-                visitor_counts[product_name] = 0
+            visitor_counts[product_name] = data["result"][0].get("count", 0)
 
         except Exception as e:
             print(f"Error fetching visitors for {product_name}: {e}")
-            visitor_counts[product_name] = -1
+            visitor_counts[product_name] = 0
 
     return visitor_counts
 
