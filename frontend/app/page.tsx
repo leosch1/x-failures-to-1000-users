@@ -37,7 +37,7 @@ const projects = [
     description:
       "A website which creates a playlist with songs both you and your friend like.\nFor Spotify and Apple Music.",
     imagePath: "/spot-the-pie.png",
-    // tryItUrl: "#",
+    tryItUrl: "https://spot-the-pie.schleo.com",
     // blogUrl: "#",
   },
 ];
