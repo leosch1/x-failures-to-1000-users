@@ -3,19 +3,21 @@ import os
 import requests
 
 def fetch_user_counts_from_posthog():
-    posthog_api_key = os.getenv("POSTHOG_API_KEY")  # This should be a personal API key
+    posthog_api_key = os.getenv("POSTHOG_API_KEY") # This should be a personal API key
     base_url = "https://eu.posthog.com/api/projects/{project_id}/insights/{insight_id}"
 
     posthog_insight_mapping = {
         "Vibe Radar": {
             "project_id": "67446",
             "insight_id": "1040318",
-            "correction": 0
+            "correction": 0,
+            "correction_factor": 0.66
         },
         "My YouTube Path": {
             "project_id": "19262",
             "insight_id": "1271863",
-            "correction": -200
+            "correction": -200,
+            "correction_factor": 0.66
         },
         "Spot The Pie": {
             # "project_id": "",
@@ -49,6 +51,7 @@ def fetch_user_counts_from_posthog():
             print(f"Error fetching visitors for {product_name}: {e}")
             visitor_counts[product_name] = 0
 
+        visitor_counts[product_name] = int(visitor_counts[product_name] * config.get("correction_factor", 1))
         visitor_counts[product_name] += config.get("correction", 0)
 
     return visitor_counts
