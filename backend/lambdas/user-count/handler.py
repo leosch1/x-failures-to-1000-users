@@ -4,7 +4,7 @@ import requests
 
 def fetch_user_counts_from_posthog():
     posthog_api_key = os.getenv("POSTHOG_API_KEY") # This should be a personal API key
-    base_url = "https://eu.posthog.com/api/projects/{project_id}/insights/{insight_id}"
+    base_url = "https://eu.posthog.com/api/projects/{project_id}/insights/{insight_id}?refresh=blocking"
 
     posthog_insight_mapping = {
         "Vibe Radar": {
@@ -35,7 +35,7 @@ def fetch_user_counts_from_posthog():
 
     for product_name, config in posthog_insight_mapping.items():
         try:
-            if config["insight_id"]:
+            if config.get("insight_id") and config.get("project_id"):
                 url = base_url.format(
                     project_id=config["project_id"],
                     insight_id=config["insight_id"]
@@ -49,6 +49,7 @@ def fetch_user_counts_from_posthog():
                 visitor_counts[product_name] = 0
         except Exception as e:
             print(f"Error fetching visitors for {product_name}: {e}")
+            print(f"Response content: {response.content if 'response' in locals() else 'No response'}")
             visitor_counts[product_name] = 0
 
         visitor_counts[product_name] = int(visitor_counts[product_name] * config.get("correction_factor", 1))
