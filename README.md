@@ -4,7 +4,6 @@ I document my failures until I succeed in building something with 1000 users.
 
 This repo powers a small public tracker that lists my product attempts and shows user counts fetched from PostHog.
 
-Image:
 ![Screenshot of the site](./docs/screenshot.png)
 
 ## Repo structure
