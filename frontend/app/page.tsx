@@ -43,7 +43,11 @@ const projects = [
 ];
 
 export default function Home() {
-  const [userCounts, setUserCounts] = useState<Record<string, number>>({});
+  const [userCounts, setUserCounts] = useState<Record<string, number>>({
+    "Vibe Radar": 159,
+    "My YouTube Path": 283,
+    "Spot The Pie": 15,
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
